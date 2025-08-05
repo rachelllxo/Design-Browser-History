@@ -39,4 +39,19 @@ string visit_newWebpage(string url) {
     }
     return NewWebpage->data;
 }
+int move_backward(int steps) {									//function to move backwards from the current webpage
+
+/* while the number of steps given is greater than zero and the new webpage's previous node is not NULL, 
+
+		the new webpage's next node points to it's previous webpage
+*/
+    while (steps > 0 && NewWebpage->prevWebpage != NULL) {		
+        NewWebpage = NewWebpage->prevWebpage;
+        steps--;
+    }
+    cout << "Current page: " << NewWebpage->data << endl;		//to print the current page after going back
+    return 0;
+}
+
+
 

@@ -52,6 +52,29 @@ int move_backward(int steps) {									//function to move backwards from the cur
     cout << "Current page: " << NewWebpage->data << endl;		//to print the current page after going back
     return 0;
 }
+int move_forward(int steps) {
+    while (steps > 0 && NewWebpage->nextWebpage != NULL) {
+        NewWebpage = NewWebpage->nextWebpage;
+        steps--;
+    }
+    cout << "Current page after going forward: " << NewWebpage->data << endl;
+    return 0;
+}
+
+void show() {
+    Webpage* temp = head;
+    cout << "Browser History: ";
+    while (temp != NULL) {
+        if (temp == NewWebpage) {
+            cout << temp->data;  // highlight current page
+        } else {
+            cout << temp->data << " ";
+        }
+        temp = temp->nextWebpage;
+    }
+    cout << endl;
+}
+
 
 
 

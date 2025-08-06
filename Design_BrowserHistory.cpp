@@ -3,55 +3,52 @@
 *
 * Authors: Rachel, Afridha Shaheen & Thrisha 
 * 
-* Description: Designed a browser history that can create a Homepage, visit a new page, move backwards and forwards within the browser 
-				using doubly linked list.
+* Description: Designed a browser history that can create a Homepage, visit a new page, 
+*              move backwards and forwards within the browser using doubly linked list.
 */
- 
-#include <iostream>									//header files 
+
+#include <iostream>
 #include <string>
 using namespace std;
 
-
-struct Webpage {									//structure for a webpage using doubly linked list
-    string data;									//the data part of the doubly linked list that stores the URL			
-    Webpage* prevWebpage;							//the pointer to the previous webpage's address 
-    Webpage* nextWebpage;							//the pointer to the next webpage's address 
+struct Webpage {
+    string data;
+    Webpage* prevWebpage;
+    Webpage* nextWebpage;
 };
 
 Webpage* head = NULL;
 Webpage* NewWebpage = NULL;
 
-string visit_newWebpage(string url) {
+int visit_newWebpage(string url) {
     if (head == NULL) {
-        Webpage* Homepage = new Webpage;		        //creating a new node to store the homepage
+        Webpage* Homepage = new Webpage;
         Homepage->data = url;
-        Homepage->prevWebpage = NULL;			        //the homepage has no previous node
-        Homepage->nextWebpage = NULL; 			        //the homepage's next node is NULL for now 
+        Homepage->prevWebpage = NULL;
+        Homepage->nextWebpage = NULL;
         head = Homepage;
         NewWebpage = Homepage;
     } else {
-        Webpage* temp = new Webpage;			        //creating a new webpage node that holds the URL
+        Webpage* temp = new Webpage;
         temp->data = url;
-        temp->prevWebpage = NewWebpage; 			    //the previous node of the new webpage points to current page
+        temp->prevWebpage = NewWebpage;
         temp->nextWebpage = NULL;
-        NewWebpage->nextWebpage = temp;			        //the current page's next points to the new webpage
-        NewWebpage = temp;					            //move current pointer to new webpage
+        NewWebpage->nextWebpage = temp;
+        NewWebpage = temp;
     }
-    return NewWebpage->data;
+    cout << "Visited: " << NewWebpage->data << endl;
+    return 0;
 }
-int move_backward(int steps) {									//function to move backwards from the current webpage
 
-/* while the number of steps given is greater than zero and the new webpage's previous node is not NULL, 
-
-		the new webpage's next node points to it's previous webpage
-*/
-    while (steps > 0 && NewWebpage->prevWebpage != NULL) {		
+int move_backward(int steps) {
+    while (steps > 0 && NewWebpage->prevWebpage != NULL) {
         NewWebpage = NewWebpage->prevWebpage;
         steps--;
     }
-    cout << "Current page: " << NewWebpage->data << endl;		//to print the current page after going back
+    cout << "Current page: " << NewWebpage->data << endl;
     return 0;
 }
+
 int move_forward(int steps) {
     while (steps > 0 && NewWebpage->nextWebpage != NULL) {
         NewWebpage = NewWebpage->nextWebpage;
@@ -61,20 +58,59 @@ int move_forward(int steps) {
     return 0;
 }
 
-void show() {
+int show() {
     Webpage* temp = head;
     cout << "Browser History: ";
     while (temp != NULL) {
         if (temp == NewWebpage) {
-            cout << temp->data;  // highlight current page
+            cout << "[" << temp->data << "] "; // highlight current page
         } else {
             cout << temp->data << " ";
         }
         temp = temp->nextWebpage;
     }
     cout << endl;
+    return 0;
 }
 
+int main() {
+    string homepage;
+    cout << "Enter homepage URL: ";
+    cin >> homepage;
+    visit_newWebpage(homepage);
 
+    string command;
+    while (true) {
+        cout << "\nCommands: visit <url> | back <steps> | forward <steps> | show | exit" << endl;
+        cout << "Enter command: ";
+        cin >> command;
 
+        if (command == "visit") {
+            string url;
+            cin >> url;
+            visit_newWebpage(url);
+        }
+        else if (command == "back") {
+            int steps;
+            cin >> steps;
+            move_backward(steps);
+        }
+        else if (command == "forward") {
+            int steps;
+            cin >> steps;
+            move_forward(steps);
+        }
+        else if (command == "show") {
+            show();
+        }
+        else if (command == "exit") {
+            cout << "Exiting browser history..." << endl;
+            return 0;
+        }
+        else {
+            cout << "Invalid command. Please try again." << endl;
+        }
+    }
 
+    return 0;
+}

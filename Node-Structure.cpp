@@ -7,5 +7,5 @@ struct Webpage {
     Webpage* nextWebpage;              // Pointer to the next webpage
 };
 
-Webpage* head = NULL;                  // Pointer to the first page (homepage)
-Webpage* NewWebpage = NULL;            // Pointer to the current page
+Webpage* head = nullptr;                  // Pointer to the first page (homepage)
+Webpage* NewWebpage = nullptr;            // Pointer to the current page

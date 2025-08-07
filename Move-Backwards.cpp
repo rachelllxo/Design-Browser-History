@@ -5,7 +5,7 @@
  * @param - steps - Number of steps to move back.
  */
 int move_backward(int steps) {
-    while (steps > 0 && NewWebpage->prevWebpage != NULL) {					// As long as steps > 0 and previous page exists
+    while (steps > 0 && NewWebpage->prevWebpage != nullptr) {					// As long as steps > 0 and previous page exists
         NewWebpage = NewWebpage->prevWebpage;								// Move back to previous page
         steps--;															// Decrease step count
     }

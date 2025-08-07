@@ -4,7 +4,7 @@
 int show() {
     Webpage* temp = head;													// Start from the head of the list
     cout << "Browser History: ";											// Print heading
-    while (temp != NULL) {													// Loop through all nodes
+    while (temp != nullptr) {													// Loop through all nodes
         if (temp == NewWebpage) {											// If the node is the current page
             cout << "[" << temp->data << "] ";								// Highlight it with brackets
         } else {

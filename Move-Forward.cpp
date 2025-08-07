@@ -4,7 +4,7 @@
  * @param - steps - Number of steps to move forward.
  */
 int move_forward(int steps) {
-    while (steps > 0 && NewWebpage->nextWebpage != NULL) {						// As long as steps > 0 and next page exists
+    while (steps > 0 && NewWebpage->nextWebpage != nullptr) {						// As long as steps > 0 and next page exists
         NewWebpage = NewWebpage->nextWebpage;									// Move forward to next page
         steps--;																// Decrease step count
     }

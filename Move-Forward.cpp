@@ -8,6 +8,6 @@ int move_forward(int steps) {
         NewWebpage = NewWebpage->nextWebpage;									// Move forward to next page
         steps--;																// Decrease step count
     }
-    cout << "Current page after going forward: " << NewWebpage->data << endl;	// Show current page after moving forward
+    cout << "Current page: " << NewWebpage->data << endl;	// Show current page after moving forward
     return 0;															
 }
